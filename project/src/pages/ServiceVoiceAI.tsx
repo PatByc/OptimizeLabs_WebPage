@@ -16,8 +16,9 @@ export default function ServiceVoiceAI() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    const assistant = "005f4909-983b-48a6-88f4-e068efd5456c";
-    const apiKey = "219cd46a-b792-4a22-a7aa-28a731e3428f";
+    // Safe to use environment keys
+    const assistant = import.meta.env.VITE_VAPI_ASSISTANT_ID;
+    const apiKey = import.meta.env.VITE_VAPI_API_KEY;
 
     const buttonConfig = {
       position: "bottom-right",

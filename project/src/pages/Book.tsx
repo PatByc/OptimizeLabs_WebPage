@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { useTranslation } from "../hooks/useTranslation";
-import { supabase } from "../lib/supabase";
+import { supabase } from "../lib/supabase"; // Supabase API link
 
 export default function Book() {
   const t = useTranslation();
@@ -24,7 +24,7 @@ export default function Book() {
     try {
       // 1) zapis leada do Supabase (nawet jeśli nie zarezerwuje terminu)
       const { error: submitError } = await supabase
-        .from("consultation_requests")
+        .from("ConsultationRequests")
         .insert([formData]);
 
       if (submitError) throw submitError;
@@ -36,9 +36,10 @@ export default function Book() {
         `Firma: ${formData.company_name}\nBranża: ${formData.industry}\nCo chcesz poprawić: ${formData.improvement_area}`
       );
 
+      const calLink = import.meta.env.VITE_CAL_COM_URL;
+
       const calUrl =
-        `https://cal.com/patryk-byczynski-qnkisi/contact-optimizelabs` +
-        `?name=${name}&email=${email}&notes=${notes}`;
+         calLink + `?name=${name}&email=${email}&notes=${notes}`;
 
       window.open(calUrl, "_blank", "noopener,noreferrer");
 
